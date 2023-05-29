@@ -1,0 +1,40 @@
+#COMMANDS
+
+source install/setup.bash              
+
+##############################################################################################################################
+	
+   #START DRIVER
+
+	# SIMULATED UR5 IN RVIZ2
+
+   ros2 launch ur_bringup ur_control.launch.py ur_type:=ur5 robot_ip:=yyy.yyy.yyy.yyy use_fake_hardware:=true launch_rviz:=false
+   
+   	# REAL ROBOT
+   ros2 launch ur_bringup ur_control.launch.py ur_type:=ur5 robot_ip:=192.168.0.100 launch_rviz:=false
+   
+##############################################################################################################################
+   
+   #STARTING PUBLISHER NODE
+   
+   ros2 launch ur_bringup square_printer.launch.py
+
+   
+##############################################################################################################################   
+   
+   #BUILD
+   
+   colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
+   
+##############################################################################################################################
+   
+   #WS
+   
+   export COLCON_WS=~/workspace/ros_ur_driver
+   cd $COLCON_WS
+   
+##############################################################################################################################   
+   
+   #TOOL COMMUNICATION
+   
+   https://docs.ros.org/en/ros2_packages/rolling/api/ur_robot_driver/setup_tool_communication.html
